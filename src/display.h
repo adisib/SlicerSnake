@@ -45,6 +45,15 @@ enum Texture_t
 
 
 
+struct SnakeTextureList
+{
+    Texture_t head;
+    Texture_t body;
+    Texture_t tail;
+};
+
+
+
 class Display
 {
 
@@ -82,19 +91,18 @@ public:
     // PostConditions:
     //   A snake head with headTexture texture is moved from oldPos to newPos
     //   A snake body with bodyTexture texture is moved into oldPos
-    void moveSnakeHead(const Vec2& oldPos, const Vec2& newPos,
-                       Texture_t headTexture = SNAKE_HEAD_TEXTURE, Texture_t bodyTexture = SNAKE_TEXTURE);
+    void moveSnakeHead(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures);
 
     // PreConditions:
     // PostConditions:
     //   A snake body with bodyTexture texture is moved from oldPos into newPos
-    void moveSnakeBody(const Vec2& oldPos, const Vec2& newPos, Texture_t texture = SNAKE_TEXTURE);
+    void moveSnakeBody(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures);
 
     // PreConditions:
     // PostConditions:
     //   A snake tail with a texture as its texture is moved into newPos
     //   A snake tail is moved out of oldPos
-    void moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, Texture_t texture = SNAKE_TEXTURE);
+    void moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures);
 
     // PreConditions:
     //   There is enough space on a line of the display to fit message

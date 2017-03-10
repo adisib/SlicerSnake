@@ -32,15 +32,12 @@ public:
     //   displayHandle points to an active display
     //   startingPos contains a clear position within the boundaries of the display
     //   startingLength is small enough to fit within the display given the startingPos
-    //   snakeColor holds a valid texture name
-    //   snakeHeadColor holds a valid texture name
     // PostConditions:
     //   A new snake is created at the specified position with the given length and textures
     Snake(Display* displayHandle,
-          const Vec2& startingPos,
-          const size_t startingLength = 3,
-          const Texture_t snakeColor = SNAKE_TEXTURE,
-          const Texture_t snakeHeadColor = SNAKE_HEAD_TEXTURE);
+          const SnakeTextureList& textureList,
+          const Vec2& startingPos = {2, 2},
+          const size_t startingLength = 3);
 
     // PreConditions:
     //   The snake has a handle to an active display
@@ -107,8 +104,7 @@ protected:
     size_t length;
     std::list<Vec2> pos;
 
-    Texture_t texture;
-    Texture_t headTexture;
+    SnakeTextureList snakeTextures;
 };
 
 }

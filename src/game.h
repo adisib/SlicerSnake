@@ -23,6 +23,8 @@ enum Game_t
     GM_SLICER, GM_CLASSIC, GM_NONE
 };
 
+
+
 class SnakeGame
 {
 

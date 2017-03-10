@@ -209,29 +209,29 @@ void Display::initScreen(coordType size_x, coordType size_y)
 
 
 
-void Display::moveSnakeHead(const Vec2& oldPos, const Vec2& newPos, Texture_t headTexture, Texture_t bodyTexture)
+void Display::moveSnakeHead(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures)
 {
-    mvwaddchnstr(snakeWin, oldPos.y, oldPos.x * 2, gameTextures[bodyTexture], 2);
+    mvwaddchnstr(snakeWin, oldPos.y, oldPos.x * 2, gameTextures[snakeTextures.body], 2);
 
-    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[headTexture], 2);
+    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[snakeTextures.head], 2);
 }
 
 
 
-void Display::moveSnakeBody(const Vec2& oldPos, const Vec2& newPos, Texture_t texture)
+void Display::moveSnakeBody(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures)
 {
     // unused in curses implementation
 }
 
 
 
-void Display::moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, Texture_t texture)
+void Display::moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures)
 {
-    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[texture], 2);
+    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[snakeTextures.tail], 2);
 
     // Don't overwrite anything else when clearing old tail
     chtype prevChar = mvwinch(snakeWin, oldPos.y, oldPos.x * 2);
-    if (prevChar == gameTextures[texture][0])
+    if (prevChar == gameTextures[snakeTextures.tail][0])
     {
         mvwaddchnstr(snakeWin, oldPos.y, oldPos.x * 2, gameTextures[BACKGROUND_TEXTURE], 2);
     }

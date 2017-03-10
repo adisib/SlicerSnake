@@ -95,6 +95,7 @@ void SnakeGame::processInputs(Snake* playerSnake)
 
     if (input.getPause())
     {
+        display->clearGameMessage();
         display->printGameMessage("Paused");
 
         do
@@ -140,8 +141,10 @@ void SnakeGame::runNewClassicGame()
 {
     setGameDelay(0.09);
 
+    SnakeTextureList textures;
     Vec2 snakeStartingPos = {4, 3};
-    snakeList.emplace_front(display, snakeStartingPos, 3, SNAKE_TEXTURE, SNAKE_HEAD_TEXTURE);
+    textures.head = SNAKE_HEAD_TEXTURE; textures.body = SNAKE_TEXTURE; textures.tail = SNAKE_TEXTURE;
+    snakeList.emplace_front(display, textures, snakeStartingPos, 3);
     Snake* playerSnake = &(snakeList.front());
 
     spawnFood();
@@ -188,12 +191,15 @@ void SnakeGame::runNewSlicerGame()
     setGameDelay(0.09);
     size_t maxLength = 0;
 
+    SnakeTextureList textures;
     Vec2 snakeStartingPos = {4, 3};
-    snakeList.emplace_front(display, snakeStartingPos, 3, SNAKE_TEXTURE, SNAKE_HEAD_TEXTURE);
+    textures.head = SNAKE_HEAD_TEXTURE; textures.body = SNAKE_TEXTURE; textures.tail = SNAKE_TEXTURE;
+    snakeList.emplace_front(display, textures, snakeStartingPos, 3);
     Snake* playerSnake = &(snakeList.front());
 
     snakeStartingPos = {display->getSize_x() - 4, display->getSize_y() - 3};
-    snakeList.emplace_front(display, snakeStartingPos, 3, SS_SNAKE_TEXTURE, SS_SNAKE_HEAD_TEXTURE);
+    textures.head = SS_SNAKE_HEAD_TEXTURE; textures.body = SS_SNAKE_TEXTURE; textures.tail = SS_SNAKE_TEXTURE;
+    snakeList.emplace_front(display, textures, snakeStartingPos, 3);
 
     spawnFood();
 

@@ -5,15 +5,13 @@ namespace ssnake
 {
 
 Snake::Snake(Display* displayHandle,
+             const SnakeTextureList& textureList,
              const Vec2& startingPos,
-             const size_t startingLength,
-             const Texture_t snakeTexture,
-             const Texture_t snakeHeadTexture)
+             const size_t startingLength)
 {
     display = displayHandle;
 
-    texture = snakeTexture;
-    headTexture = snakeHeadTexture;
+    snakeTextures = textureList;
 
     Vec2 win = {display->getSize_x(), display->getSize_y()};
 
@@ -363,18 +361,18 @@ void Snake::move()
             break;
     }
 
-    display->moveSnakeHead(pos.back(), coord, headTexture, texture);
+    display->moveSnakeHead(pos.back(), coord, snakeTextures);
     if (pos.size() > 1)
     {
         std::list<Vec2>::iterator start = ++pos.begin();
         std::list<Vec2>::iterator stop = --pos.end();
         for (std::list<Vec2>::iterator it = start; it != stop;)
         {
-            display->moveSnakeBody(*it, *(++it), texture);
+            display->moveSnakeBody(*it, *(++it), snakeTextures);
         }
         if (length <= pos.size())
         {
-            display->moveSnakeTail(pos.front(), *(start), texture);
+            display->moveSnakeTail(pos.front(), *(start), snakeTextures);
         }
     }
     else
