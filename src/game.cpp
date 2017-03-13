@@ -95,7 +95,6 @@ void SnakeGame::processInputs(Snake* playerSnake)
 
     if (input.getPause())
     {
-        display->clearGameMessage();
         display->printGameMessage("Paused");
 
         do

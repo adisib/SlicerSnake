@@ -252,6 +252,8 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
 
 void Display::printGameMessage(const char* message)
 {
+    clearGameMessage();
+
     std::size_t size = std::strlen(message);
     std::size_t maxGameTextLength = 2 * ((getmaxx(gameWin) / 2) - (std::strlen(maxLengthLabel) + windowPadding + 2) - 1);
     if (size > maxGameTextLength)
