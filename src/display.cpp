@@ -116,6 +116,7 @@ void Display::initCurses()
     */
     initscr();
     start_color();
+    leaveok(stdscr, true);
     refresh();
 
     curs_set(0);
