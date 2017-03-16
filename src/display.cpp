@@ -270,16 +270,6 @@ void Display::printGameMessage(const char* message)
 
 
 
-void Display::printDebugNum(double number)
-{
-    mvwprintw(gameWin, 0, (getmaxx(gameWin) / 2), "%f", number);
-
-    // Game messages should be printed immediately
-    update();
-}
-
-
-
 void Display::setTextures()
 {
     init_pair(SNAKE_TEXTURE, COLOR_GREEN, COLOR_BLACK);
