@@ -116,7 +116,7 @@ void Display::initCurses()
     */
     initscr();
     start_color();
-    leaveok(stdscr, true);
+    leaveok(stdscr, TRUE);
     refresh();
 
     curs_set(0);
@@ -303,7 +303,7 @@ void Display::setTextures()
         init_pair(SS_SNAKE_HEAD_TEXTURE, COLOR_MAGENTA, COLOR_BLACK);
     }
 
-    chtype missingTexture = '?';
+    const chtype missingTexture = '?';
 
     gameTextures = new chtype*[TEXTURE_COUNT];
     gameTextures[0] = new chtype[TEXTURE_COUNT*2];
