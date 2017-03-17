@@ -150,15 +150,7 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
     else
     {
-        snakeWin = subwin(stdscr,
-                          ScreenSize.y - (gameTextLines + windowPadding * 2),
-                          ScreenSize.x - (windowPadding * 2),
-                          windowPadding,
-                          windowPadding);
-
-        /*
         snakeWin = newpad(ScreenSize.y - (gameTextLines + windowPadding * 2), ScreenSize.x - (windowPadding * 2));
-        */
     }
     if (gameWin != nullptr)
     {
@@ -166,15 +158,7 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
     else
     {
-        gameWin = subwin(stdscr,
-                         gameTextLines,
-                         ScreenSize.x - (windowPadding * 2),
-                         ScreenSize.y - (gameTextLines + windowPadding),
-                         windowPadding);
-
-        /*
         gameWin = newpad(gameTextLines, ScreenSize.x - (windowPadding * 2));
-        */
     }
     if (messageWin != nullptr)
     {
@@ -182,15 +166,7 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
     else
     {
-        messageWin = subwin(stdscr,
-                            ScreenSize.y - (gameTextLines + windowPadding * 2),
-                            ScreenSize.x - (windowPadding * 2),
-                            windowPadding,
-                            windowPadding);
-
-        /*
         messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2), ScreenSize.x - (windowPadding * 2), 0, 0);
-        */
     }
 
     // gameWin and messageWin always uses the same color for now
@@ -317,7 +293,6 @@ void Display::setTextures()
     gameTextures[COLLISION_TEXTURE][1]     = '*' | COLOR_PAIR(COLLISION_TEXTURE);
     gameTextures[BACKGROUND_TEXTURE][0]    = ' ' | COLOR_PAIR(BACKGROUND_TEXTURE);
     gameTextures[BACKGROUND_TEXTURE][1]    = ' ' | COLOR_PAIR(BACKGROUND_TEXTURE);
-
 }
 
 
@@ -346,26 +321,17 @@ void Display::updateMaxLengthCounter(std::size_t maxLength)
 
 void Display::update()
 {
-    wnoutrefresh(snakeWin);
-    /*
     pnoutrefresh(snakeWin, 0, 0,
                  windowPadding, windowPadding,
                  ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
-    */
 
-    wnoutrefresh(messageWin);
-    /*
     pnoutrefresh(messageWin, 0, 0,
                  windowPadding, windowPadding,
                  ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
-    */
 
-    wnoutrefresh(gameWin);
-    /*
     pnoutrefresh(gameWin, 0, 0,
                  ScreenSize.y - (gameTextLines + windowPadding), windowPadding,
                  ScreenSize.y - windowPadding, ScreenSize.x - windowPadding);
-    */
 
     doupdate();
 }
