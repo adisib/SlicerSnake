@@ -157,6 +157,11 @@ private:
     // Window for outputing text, for menu or instructions (same as snakeWin for now)
     PWINDOW messageWin = nullptr;
 
+    // A window is modified if it called curses functions directly and needs curses to therefore update that window
+    bool snakeWinModified = true;
+    bool gameWinModified = true;
+    bool messageWinModified = true;
+
     // List of loaded textures (chtypes in curses)
     // gameTextures holds colored characters, so that you can use addchstr(textures[Texture_t])
     // If only want to set the color of custom text, use attron(COLOR_PAIR(Texture_t)), since textures have colors as well

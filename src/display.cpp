@@ -60,6 +60,8 @@ void Display::clearGameMessage()
     {
         waddch(gameWin, ' ');
     }
+
+    gameWinModified = true;
 }
 
 
@@ -74,12 +76,12 @@ void Display::clearScreen()
     box(snakeWin, 0, 0);
     wattroff(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
 
-    wnoutrefresh(snakeWin);
-    wnoutrefresh(gameWin);
-    wnoutrefresh(messageWin);
+    snakeWinModified = true;
+    gameWinModified = true;
+    messageWinModified = true;
 
     // Clear screen immediately
-    doupdate();
+    update();
 }
 
 
@@ -87,6 +89,7 @@ void Display::clearScreen()
 void Display::drawTexture(Texture_t texture, const Vec2& pos)
 {
     mvwaddchnstr(snakeWin, pos.y, pos.x * 2, gameTextures[texture], 2);
+    snakeWinModified = true;
 }
 
 
@@ -177,9 +180,10 @@ void Display::initScreen(coordType size_x, coordType size_y)
     box(snakeWin, 0, 0);
     wattroff(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
 
-    wnoutrefresh(snakeWin);
-    wnoutrefresh(gameWin);
-    wnoutrefresh(messageWin);
+    snakeWinModified = true;
+    gameWinModified = true;
+    messageWinModified = true;
+    update();
 
     return;
 }
@@ -188,9 +192,9 @@ void Display::initScreen(coordType size_x, coordType size_y)
 
 void Display::moveSnakeHead(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures)
 {
-    mvwaddchnstr(snakeWin, oldPos.y, oldPos.x * 2, gameTextures[snakeTextures.body], 2);
+    drawTexture(snakeTextures.body, oldPos);
 
-    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[snakeTextures.head], 2);
+    drawTexture(snakeTextures.head, newPos);
 }
 
 
@@ -204,13 +208,13 @@ void Display::moveSnakeBody(const Vec2& oldPos, const Vec2& newPos, const SnakeT
 
 void Display::moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, const SnakeTextureList& snakeTextures)
 {
-    mvwaddchnstr(snakeWin, newPos.y, newPos.x * 2, gameTextures[snakeTextures.tail], 2);
+    drawTexture(snakeTextures.tail, newPos);
 
     // Don't overwrite anything else when clearing old tail
     chtype prevChar = mvwinch(snakeWin, oldPos.y, oldPos.x * 2);
     if (prevChar == gameTextures[snakeTextures.tail][0])
     {
-        mvwaddchnstr(snakeWin, oldPos.y, oldPos.x * 2, gameTextures[BACKGROUND_TEXTURE], 2);
+        drawTexture(BACKGROUND_TEXTURE, oldPos);
     }
 }
 
@@ -223,6 +227,8 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
     std::size_t maxTextLength = ScreenSize.x - (windowPadding * 2) - 2;
 
     mvwaddnstr(messageWin, lineNumber, (getmaxx(messageWin) / 2) - (size / 2), message, static_cast<int>(maxTextLength));
+
+    messageWinModified = true;
 }
 
 
@@ -240,6 +246,7 @@ void Display::printGameMessage(const char* message)
 
     mvwaddnstr(gameWin, 0, (getmaxx(gameWin) / 2) - (size / 2), message, static_cast<int>(maxGameTextLength));
 
+    gameWinModified = true;
     // Game messages should be printed immediately
     update();
 }
@@ -304,6 +311,8 @@ void Display::updateLengthCounter(std::size_t length)
     std::size_t lengthLabelSize = std::strlen(lengthLabel);
     mvwaddstr(gameWin, 0, lengthLabelSize + windowPadding, "   ");
     mvwprintw(gameWin, 0, lengthLabelSize + windowPadding, "%d", length);
+
+    gameWinModified = true;
 }
 
 
@@ -315,25 +324,45 @@ void Display::updateMaxLengthCounter(std::size_t maxLength)
 
     mvwaddstr(gameWin, 0, getmaxx(gameWin) - (windowPadding + 2), "   ");
     mvwprintw(gameWin, 0, getmaxx(gameWin) - (windowPadding + 2), "%d", maxLength);
+
+    gameWinModified = true;
 }
 
 
 
 void Display::update()
 {
-    pnoutrefresh(snakeWin, 0, 0,
-                 windowPadding, windowPadding,
-                 ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
+    if ( !(snakeWinModified || gameWinModified || messageWinModified) )
+    {
+        return;
+    }
 
-    pnoutrefresh(messageWin, 0, 0,
-                 windowPadding, windowPadding,
-                 ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
+    if (snakeWinModified)
+    {
+        pnoutrefresh(snakeWin, 0, 0,
+                     windowPadding, windowPadding,
+                     ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
+    }
 
-    pnoutrefresh(gameWin, 0, 0,
-                 ScreenSize.y - (gameTextLines + windowPadding), windowPadding,
-                 ScreenSize.y - windowPadding, ScreenSize.x - windowPadding);
+    if (messageWinModified)
+    {
+        pnoutrefresh(messageWin, 0, 0,
+                     windowPadding, windowPadding,
+                     ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
+    }
+
+    if (gameWinModified)
+    {
+        pnoutrefresh(gameWin, 0, 0,
+                     ScreenSize.y - (gameTextLines + windowPadding), windowPadding,
+                     ScreenSize.y - windowPadding, ScreenSize.x - windowPadding);
+    }
 
     doupdate();
+
+    snakeWinModified = false;
+    gameWinModified = false;
+    messageWinModified = false;
 }
 
 }
