@@ -169,7 +169,8 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
     else
     {
-        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2), ScreenSize.x - (windowPadding * 2), 0, 0);
+        // We have to make it slightly smaller here for Windows builds with pdcurses, because pdcurses doesn't allow it to be the same size
+        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2) - 1, ScreenSize.x - (windowPadding * 2) - 2, 0, 0);
     }
 
     // gameWin and messageWin always uses the same color for now
@@ -224,9 +225,9 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
 {
     std::size_t size = std::strlen(message);
 
-    std::size_t maxTextLength = ScreenSize.x - (windowPadding * 2) - 2;
+    std::size_t maxTextLength = getmaxx(messageWin) - (windowPadding * 2) - 2;
 
-    mvwaddnstr(messageWin, lineNumber, (getmaxx(messageWin) / 2) - (size / 2), message, static_cast<int>(maxTextLength));
+    mvwaddnstr(messageWin, lineNumber, (getmaxx(messageWin) / 2) - (size / 2) + 1, message, static_cast<int>(maxTextLength));
 
     messageWinModified = true;
 }
