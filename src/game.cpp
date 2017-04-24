@@ -188,7 +188,6 @@ void SnakeGame::runNewClassicGame()
 void SnakeGame::runNewSlicerGame()
 {
     setGameDelay(0.09);
-    size_t maxLength = 0;
 
     SnakeTextureList textures;
     Vec2 snakeStartingPos = {4, 3};
@@ -202,6 +201,7 @@ void SnakeGame::runNewSlicerGame()
 
     spawnFood();
 
+    size_t maxLength = playerSnake->getLength();
     display->updateLengthCounter(playerSnake->getLength());
     display->updateMaxLengthCounter(maxLength);
 
