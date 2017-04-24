@@ -287,7 +287,7 @@ void SnakeGame::spawnFood()
     do
     {
         foodBad = false;
-        food.x = (((rand() % (win.x - 2)) / 2) * 2) + 1;
+        food.x = rand() % (win.x - 2) + 1;
         food.y = rand() % (win.y - 2) + 1;
 
         for (std::list<Snake>::iterator snakeIter = snakeList.begin(); snakeIter != snakeList.end(); ++snakeIter)

@@ -13,11 +13,9 @@ Snake::Snake(Display* displayHandle,
 
     snakeTextures = textureList;
 
-    Vec2 win = {display->getSize_x(), display->getSize_y()};
-
     // starting directions depend on starting postions
     // so don't immediately face a wall
-    if (startingPos.x < (win.x / 2))
+    if (startingPos.x < (display->getSize_x() / 2))
     {
         direction = RIGHT;
     }
@@ -278,7 +276,7 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
             continue;
         }
 
-        Vec2 sd_coord = slicedIter->pos.back();
+        Vec2 sd_coord;
 
         size_t checkSize = slicedIter->pos.size();
 
@@ -292,8 +290,7 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
         std::list<Vec2>::iterator cut;
         for (size_t i = 1; i <= checkSize; ++i)
         {
-            sd_coord = *it;
-            ++it;
+            sd_coord = *it++;
 
             if (ss_coord.x == sd_coord.x && ss_coord.y == sd_coord.y)
             {
@@ -400,7 +397,7 @@ void Snake::setDirection(Direction_t newDirection)
            (newDirection == UP && direction != DOWN) ||
            (newDirection == DOWN && direction != UP)
          ) ||
-         (length == 1 )
+         (length == 1)
        )
     {
         direction = newDirection;

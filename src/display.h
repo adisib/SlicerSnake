@@ -115,7 +115,6 @@ public:
     // PostConditions:
     //   Displays a small one-line text message outside of the snake area (bottom center of screen)
     void printGameMessage(const char* message);
-    void printDebugNum(double number);
     void clearGameMessage();
 
     // PreConditions:

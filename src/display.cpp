@@ -344,14 +344,12 @@ void Display::update()
                      windowPadding, windowPadding,
                      ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
     }
-
     if (messageWinModified)
     {
         pnoutrefresh(messageWin, 0, 0,
                      windowPadding, windowPadding,
                      ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
     }
-
     if (gameWinModified)
     {
         pnoutrefresh(gameWin, 0, 0,
