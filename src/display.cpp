@@ -19,6 +19,10 @@ Display::Display(const coordType size_x, const coordType size_y)
 
 Display::~Display()
 {
+    if (messageWin != nullptr)
+    {
+        delwin(messageWin);
+    }
     if (snakeWin != nullptr)
     {
         delwin(snakeWin);
@@ -26,10 +30,6 @@ Display::~Display()
     if (gameWin != nullptr)
     {
         delwin(gameWin);
-    }
-    if (messageWin != nullptr)
-    {
-        delwin(messageWin);
     }
 
     clear();
