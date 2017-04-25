@@ -269,7 +269,7 @@ void Display::setTextures()
     init_pair(GAME_TEXT_TEXTURE, COLOR_RED, COLOR_BLACK);
     init_pair(COLLISION_TEXTURE, COLOR_RED, COLOR_BLACK);
     init_pair(BACKGROUND_TEXTURE, COLOR_BLACK, COLOR_BLACK);
-    if (can_change_color() && COLORS>=256)
+    if (can_change_color() && COLORS >= 256 && COLOR_PAIRS >= 16)
     {
         init_color(9, 40, 1000, 90);
         init_color(10, 900, 70, 1000);
