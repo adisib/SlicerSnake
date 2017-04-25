@@ -34,8 +34,8 @@ public:
 
     // PreConditions:
     // PostConditions:
-    //   If duration_ms > 0, collect input for duration_ms milliseconds
-    //   If duration_ms <= 0, wait indefinately for next input
+    //   If duration_ms >= 0, collect input for duration_ms milliseconds
+    //   If duration_ms < 0, wait indefinitely for next input
     void collectInput(int duration_ms);
 
     // PreConditions:

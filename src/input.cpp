@@ -34,7 +34,7 @@ void PlayerInput::collectInput(int duration)
 
     prevDirection = direction;
 
-    if (duration <= 0)
+    if (duration < 0)
     {
         nodelay(stdscr, FALSE);
     }

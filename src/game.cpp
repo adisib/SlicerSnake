@@ -156,10 +156,17 @@ void SnakeGame::runNewClassicGame()
     while (alive)
     {
         double loopRunDuration = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - beginTime).count();
-        input.collectInput(static_cast<int>((gameDelay-loopRunDuration)*1000));
+
+        int msDelay = static_cast<int>((gameDelay-loopRunDuration)*1000);
+        if (msDelay < 0)
+        {
+            msDelay = 0;
+        }
+        input.collectInput(msDelay);
+
+        beginTime = std::chrono::steady_clock::now();
 
         processInputs(playerSnake);
-        beginTime = std::chrono::steady_clock::now();
 
         playerSnake->move();
 
@@ -207,20 +214,28 @@ void SnakeGame::runNewSlicerGame()
 
     display->update();
 
+    bool isPlayer;
     std::chrono::steady_clock::time_point beginTime = std::chrono::steady_clock::now();
     while (alive)
     {
         for (std::list<Snake>::iterator snakeIter = snakeList.begin(); snakeIter != snakeList.end(); ++snakeIter)
         {
-            bool isPlayer = playerSnake == &(*snakeIter);
+            isPlayer = playerSnake == &(*snakeIter);
 
             if (isPlayer)
             {
                 double loopRunDuration = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - beginTime).count();
-                input.collectInput(static_cast<int>((gameDelay-loopRunDuration)*1000));
+
+                int msDelay = static_cast<int>((gameDelay-loopRunDuration)*1000);
+                if (msDelay < 0)
+                {
+                    msDelay = 0;
+                }
+                input.collectInput(msDelay);
+
+                beginTime = std::chrono::steady_clock::now();
 
                 processInputs(playerSnake);
-                beginTime = std::chrono::steady_clock::now();
             }
             else
             {
