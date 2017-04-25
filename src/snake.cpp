@@ -203,8 +203,8 @@ bool Snake::checkCollision()
 
     // self collision
     // If checkSlice happens first, then it can't collide with itself.
-    std::list<Vec2>::iterator stop = --pos.end();
-    for (std::list<Vec2>::iterator it = pos.begin(); it != stop; ++it)
+    std::list<Vec2>::const_iterator stop = --pos.end();
+    for (std::list<Vec2>::const_iterator it = pos.begin(); it != stop; ++it)
     {
         if (head.x == it->x && head.y == it->y)
         {
