@@ -22,7 +22,6 @@ namespace ssnake
 {
 
 typedef int coordType;
-typedef WINDOW* PWINDOW;
 
 
 
@@ -150,11 +149,11 @@ private:
     Vec2 ScreenSize;
 
     // Bordered window that contains the snakes
-    PWINDOW snakeWin = nullptr;
+    WINDOW* snakeWin = nullptr;
     // Textbox located under the window
-    PWINDOW gameWin = nullptr;
+    WINDOW* gameWin = nullptr;
     // Window for outputing text, for menu or instructions (same as snakeWin for now)
-    PWINDOW messageWin = nullptr;
+    WINDOW* messageWin = nullptr;
 
     // A window is modified if it called curses functions directly and needs curses to therefore update that window
     bool snakeWinModified = true;

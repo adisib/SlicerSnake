@@ -279,7 +279,6 @@ void SnakeGame::runNewSlicerGame()
 void SnakeGame::spawnFood()
 {
     Vec2 win = {display->getSize_x(), display->getSize_y()};
-
     Vec2 food;
 
     // don't spawn food on snakes or other food

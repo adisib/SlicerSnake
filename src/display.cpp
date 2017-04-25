@@ -229,7 +229,7 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
         return;
     }
 
-    int size = std::strlen(message);
+    std::size_t size = std::strlen(message);
 
     std::size_t maxTextLength = getmaxx(messageWin) - (windowPadding * 2) - 2;
 
