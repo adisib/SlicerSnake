@@ -223,6 +223,11 @@ void Display::moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, const SnakeT
 
 void Display::printTextLine(unsigned int lineNumber, const char* message)
 {
+    if (lineNumber > ScreenSize.y)
+    {
+        return;
+    }
+
     std::size_t size = std::strlen(message);
 
     std::size_t maxTextLength = getmaxx(messageWin) - (windowPadding * 2) - 2;
