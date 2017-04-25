@@ -1,13 +1,21 @@
-Version 1.0:
+Version 1.1:
 	Description:
-		Initial Release
+		General improvements and bug fixes, no new features.
 
 	Improvements/Enhancements to previous version:
 
 	Changes/Additions from previous version:
+		The game will now finish the next step before pausing.
 
 	Bug-Fixes since previous version:
+		Fixed issue where resizing the terminal would permanently deform the game window.
+		Fixed minor issue where maxLength wasn't set to the initial length.
+		Fixed minor issue where a momentary terminal hang could make the game frozen until input.
 
 	Known Bugs for current version:
+
+
+This listing may not be comprehensive. You can view all changes at the source code repository on github.
+https://github.com/adisib/SlicerSnake
 
 		
