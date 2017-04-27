@@ -10,12 +10,14 @@ Snake::Snake(Display* displayHandle,
              const size_t startingLength)
 {
     display = displayHandle;
+    
+    Vec2 win = {display->getSize_x(), display->getSize_y()};
 
     snakeTextures = textureList;
 
     // starting directions depend on starting postions
     // so don't immediately face a wall
-    if (startingPos.x < (display->getSize_x() / 2))
+    if (startingPos.x < (win.x / 2))
     {
         direction = RIGHT;
     }
@@ -45,7 +47,10 @@ Snake::Snake(Display* displayHandle,
         Vec2 coord;
         coord.x = startingPos.x + directionModifier*i;
         coord.y = startingPos.y;
-        pos.push_back(coord);
+        if (coord.x > 0 && coord.x < win.x && coord.y > 0 && coord.y < win.y)
+        {
+            pos.push_back(coord);
+        }
     }
 }
 
