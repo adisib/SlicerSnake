@@ -75,10 +75,10 @@ private:
 
     DirectionalKey_t direction = NONE;
     DirectionalKey_t prevDirection = NONE;
-    bool pause;
-    bool restart;
-    bool quit;
-    bool enter;
+    bool pause = false;
+    bool restart = false;
+    bool quit = false;
+    bool enter = false;
 
 };
 

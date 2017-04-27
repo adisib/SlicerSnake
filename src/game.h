@@ -79,14 +79,14 @@ private:
     PlayerInput input;
 
     // delay of game loop steps in seconds
-    double gameDelay;
+    double gameDelay = 0.0;
 
     // Snake list holds all snakes, including the player snake
     std::list<Snake> snakeList;
     std::list<Vec2> foodList;
 
-    bool alive;
-    Game_t gameType;
+    bool alive = false;
+    Game_t gameType = GM_NONE;
 
 };
 

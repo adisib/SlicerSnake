@@ -7,8 +7,6 @@ namespace ssnake
 SnakeGame::SnakeGame(Display* displayHandle)
 {
     display = displayHandle;
-
-    gameType = GM_NONE;
 }
 
 

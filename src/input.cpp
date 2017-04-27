@@ -6,13 +6,6 @@ namespace ssnake
 
 PlayerInput::PlayerInput()
 {
-    direction = NONE;
-    prevDirection = NONE;
-    pause = false;
-    restart = false;
-    quit = false;
-    enter = false;
-
     initCurses();
 }
 
