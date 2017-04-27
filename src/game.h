@@ -34,7 +34,7 @@ public:
     //   displayHandle points to an active display
     // PostConditions:
     //   A game becomes ready to be started using that display
-    SnakeGame(Display* displayHandle);
+    explicit SnakeGame(Display* displayHandle);
 
     // PreConditions:
     // PostConditions:
