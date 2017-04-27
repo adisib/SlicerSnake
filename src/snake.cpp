@@ -122,7 +122,7 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
                 newDir = RIGHT;
             }
         }
-    } // end if (coord.x < 4 || coord.y < 4 || coord.x > (win.x - 4) || coord.y > (win.y - 4))
+    } // end if (coord.x < 4 || coord.y < 4 || xOffset < 4 || yOffset < 4)
     else // not near wall, so evasive maneuvers not required, do something else
     {
         // random movement every so often

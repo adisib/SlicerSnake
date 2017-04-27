@@ -316,8 +316,8 @@ void Display::updateLengthCounter(std::size_t length)
     mvwaddstr(gameWin, 0, windowPadding, lengthLabel);
 
     std::size_t lengthLabelSize = std::strlen(lengthLabel);
-    mvwaddstr(gameWin, 0, lengthLabelSize + windowPadding, "   ");
-    mvwprintw(gameWin, 0, lengthLabelSize + windowPadding, "%d", length);
+
+    mvwprintw(gameWin, 0, lengthLabelSize + windowPadding, "%-2u", length);
 
     gameWinModified = true;
 }
@@ -329,8 +329,7 @@ void Display::updateMaxLengthCounter(std::size_t maxLength)
     std::size_t lengthLabelSize = std::strlen(maxLengthLabel);
     mvwaddstr(gameWin, 0, getmaxx(gameWin) - (lengthLabelSize + windowPadding + 2), maxLengthLabel);
 
-    mvwaddstr(gameWin, 0, getmaxx(gameWin) - (windowPadding + 2), "   ");
-    mvwprintw(gameWin, 0, getmaxx(gameWin) - (windowPadding + 2), "%d", maxLength);
+    mvwprintw(gameWin, 0, getmaxx(gameWin) - (windowPadding + 2), "%-2u", maxLength);
 
     gameWinModified = true;
 }
