@@ -155,22 +155,22 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
         // Only go for food if close to it and not near a wall
         for (std::list<Vec2>::const_iterator food = foodList.begin(); food != foodList.end(); ++food)
         {
-            if (ai_dir != LEFT && (food->x - coord.x) <= 3 && food->x > coord.x && food->x < (win.x-4))
+            if (ai_dir != LEFT && (food->x - coord.x) <= 3 && food->x > coord.x && food->x <= (win.x-4))
             {
                 newDir = RIGHT;
                 break;
             }
-            else if (ai_dir != RIGHT && (coord.x - food->x) <= 3 && coord.x > food->x && food->x > 4)
+            else if (ai_dir != RIGHT && (coord.x - food->x) <= 3 && coord.x > food->x && food->x >= 4)
             {
                 newDir = LEFT;
                 break;
             }
-            else if (ai_dir != DOWN && (food->y - coord.y) <= 3 && food->y > coord.y && food->y > 4)
+            else if (ai_dir != DOWN && (food->y - coord.y) <= 3 && food->y > coord.y && food->y >= 4)
             {
                 newDir = UP;
                 break;
             }
-            else if (ai_dir != UP && (coord.y - food->y) <= 3 && coord.y > food->y && food->y > (win.y-4))
+            else if (ai_dir != UP && (coord.y - food->y) <= 3 && coord.y > food->y && food->y >= (win.y-4))
             {
                 newDir = DOWN;
                 break;
