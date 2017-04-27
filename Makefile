@@ -2,7 +2,7 @@
 CC = g++
 SDIR = ./src
 OPTIMIZE = -DNDEBUG -Os -flto -pipe
-DEBUG = -DDEBUG -g -Wall -Og
+DEBUG = -DDEBUG -g -Wall -Wextra -Og
 CFLAGS = -std=c++11
 LIBS = -lncurses
 
