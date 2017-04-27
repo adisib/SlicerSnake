@@ -302,8 +302,8 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
                 cut = it;
                 totalCount += i;
 
+                assert(slicedIter->length >= i);
                 slicedIter->length -= i;
-                assert(slicedIter->length >= 0);
 
                 if (slicedIter->length != 0)
                 {
