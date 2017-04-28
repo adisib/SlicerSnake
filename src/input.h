@@ -71,7 +71,7 @@ public:
 private:
 
     void clearInputs();
-    void initCurses();
+    static void initCurses();
 
     DirectionalKey_t direction = NONE;
     DirectionalKey_t prevDirection = NONE;

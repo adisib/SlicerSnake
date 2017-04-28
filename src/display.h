@@ -136,7 +136,7 @@ private:
     // curses back-end
 
     // Initialize curses back-end
-    void initCurses();
+    static void initCurses();
 
     // Resizes console if necessary and creates the snakeWin and gameWin windows.
     // If the windows already exist, reset them to the initial static text and border.
