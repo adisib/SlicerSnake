@@ -1,6 +1,17 @@
 
 #include "display.h"
 
+#include <cstdlib> // size_t, system (windows)
+#include <cassert>
+#include <cstring> // strlen
+
+#ifdef _WIN32
+    #include "curses.h" // pdcurses for windows
+#else
+    #include <ncurses.h> // ncurses for linux (and whatever else it happens to work on)
+#endif
+
+
 namespace ssnake
 {
 

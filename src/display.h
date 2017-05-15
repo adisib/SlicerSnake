@@ -7,9 +7,7 @@
 #define SLICERSNAKE_DISPLAY_H
 
 
-#include <cstdlib> // system (windows)
-#include <cassert>
-#include <cstring> // strlen
+#include <cstdlib> // size_t, system (windows)
 
 #ifdef _WIN32
     #include "curses.h" // pdcurses for windows

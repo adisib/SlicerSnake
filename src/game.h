@@ -7,7 +7,6 @@
 #define SLICERSNAKE_GAME_H
 
 
-#include <chrono>
 #include <list>
 
 #include "display.h"

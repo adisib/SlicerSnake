@@ -6,14 +6,6 @@
 #ifndef SLICERSNAKE_INPUT_H
 #define SLICERSNAKE_INPUT_H
 
-#include <chrono>
-#include <thread> // sleep_for
-
-#ifdef _WIN32
-    #include "curses.h" // pdcurses for windows
-#else
-    #include <ncurses.h> // ncurses for linux (and whatever else it happens to work on)
-#endif
 
 namespace ssnake
 {

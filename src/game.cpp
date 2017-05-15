@@ -1,6 +1,13 @@
 
 #include "game.h"
 
+#include <chrono>
+#include <list>
+
+#include "display.h"
+#include "input.h"
+#include "snake.h"
+
 namespace ssnake
 {
 

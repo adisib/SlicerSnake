@@ -7,8 +7,6 @@
 
 
 #include <list>
-#include <cstdlib> // rand
-#include <cassert>
 
 #include "display.h"
 
