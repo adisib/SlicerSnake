@@ -259,7 +259,7 @@ void SnakeGame::runNewSlicerGame()
             {
                 if (snakeIter->checkCollision())
                 {
-                    std::list<Snake>::iterator deadSnake = snakeIter++;
+                    std::list<Snake>::iterator deadSnake = snakeIter--;
                     snakeList.erase(deadSnake);
                     continue;
                 }
