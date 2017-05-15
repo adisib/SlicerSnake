@@ -252,7 +252,7 @@ void SnakeGame::runNewSlicerGame()
             {
                 if (snakeIter->checkCollision())
                 {
-                    std::list<Snake>::iterator deadSnake = snakeIter--;
+                    std::list<Snake>::iterator deadSnake = snakeIter++;
                     snakeList.erase(deadSnake);
                     continue;
                 }
@@ -302,7 +302,7 @@ void SnakeGame::spawnFood()
         food.x = rand() % (win.x - 2) + 1;
         food.y = rand() % (win.y - 2) + 1;
 
-        for (std::list<Snake>::const_iterator snakeIter = snakeList.begin(); snakeIter != snakeList.end(); ++snakeIter)
+        for (std::list<Snake>::const_iterator snakeIter = snakeList.cbegin(); snakeIter != snakeList.cend(); ++snakeIter)
         {
             if (snakeIter->checkTouch(food))
             {
@@ -310,7 +310,7 @@ void SnakeGame::spawnFood()
                 break;
             }
         }
-        for (std::list<Vec2>::const_iterator it = foodList.begin(); it != foodList.end(); ++it)
+        for (std::list<Vec2>::const_iterator it = foodList.cbegin(); it != foodList.cend(); ++it)
         {
             if (food.x == it->x && food.y == it->y)
             {

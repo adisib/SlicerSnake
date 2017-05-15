@@ -153,7 +153,7 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
         }
 
         // Only go for food if close to it and not near a wall
-        for (std::list<Vec2>::const_iterator food = foodList.begin(); food != foodList.end(); ++food)
+        for (std::list<Vec2>::const_iterator food = foodList.cbegin(); food != foodList.cend(); ++food)
         {
             if (ai_dir != LEFT && (food->x - coord.x) <= 3 && food->x > coord.x && food->x <= (win.x-4))
             {
@@ -208,8 +208,8 @@ bool Snake::checkCollision()
 
     // self collision
     // If checkSlice happens first, then it can't collide with itself.
-    std::list<Vec2>::const_iterator stop = --pos.end();
-    for (std::list<Vec2>::const_iterator it = pos.begin(); it != stop; ++it)
+    std::list<Vec2>::const_iterator stop = --pos.cend();
+    for (std::list<Vec2>::const_iterator it = pos.cbegin(); it != stop; ++it)
     {
         if (head.x == it->x && head.y == it->y)
         {
@@ -250,7 +250,7 @@ bool Snake::checkTouch(const Vec2& checkedPos) const
         return false;
     }
 
-    for (std::list<Vec2>::const_iterator it = pos.begin(); it != pos.end(); ++it)
+    for (std::list<Vec2>::const_iterator it = pos.cbegin(); it != pos.cend(); ++it)
     {
         if (checkedPos.x == it->x && checkedPos.y == it->y)
         {
