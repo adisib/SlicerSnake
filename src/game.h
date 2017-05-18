@@ -7,6 +7,7 @@
 #define SLICERSNAKE_GAME_H
 
 
+#include <chrono>
 #include <list>
 
 #include "display.h"
@@ -68,6 +69,8 @@ public:
 
 
 private:
+
+    typedef std::chrono::duration<int, std::milli> milliseconds_t;
 
     void runNewClassicGame();
     void runNewSlicerGame();

@@ -160,9 +160,9 @@ void SnakeGame::runNewClassicGame()
     std::chrono::steady_clock::time_point beginTime = std::chrono::steady_clock::now();
     while (alive)
     {
-        double loopRunDuration = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - beginTime).count();
+        int loopRunDuration_ms = std::chrono::duration_cast<milliseconds_t>(std::chrono::steady_clock::now() - beginTime).count();
 
-        int msDelay = static_cast<int>((gameDelay-loopRunDuration)*1000);
+        int msDelay = static_cast<int>(getGameDelay() * 1000) - loopRunDuration_ms;
         if (msDelay < 0)
         {
             msDelay = 0;
@@ -229,9 +229,9 @@ void SnakeGame::runNewSlicerGame()
 
             if (isPlayer)
             {
-                double loopRunDuration = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::steady_clock::now() - beginTime).count();
+                int loopRunDuration_ms = std::chrono::duration_cast<milliseconds_t>(std::chrono::steady_clock::now() - beginTime).count();
 
-                int msDelay = static_cast<int>((gameDelay-loopRunDuration)*1000);
+                int msDelay = static_cast<int>(getGameDelay() * 1000) - loopRunDuration_ms;
                 if (msDelay < 0)
                 {
                     msDelay = 0;
