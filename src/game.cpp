@@ -20,14 +20,14 @@ SnakeGame::SnakeGame(Display* displayHandle)
 
 void SnakeGame::decreaseGameSpeed(unsigned int numberOfTimes)
 {
-    gameDelay += 0.0015*numberOfTimes;
+    gameDelay += 0.0015 * numberOfTimes;
 }
 
 
 
 void SnakeGame::increaseGameSpeed(unsigned int numberOfTimes)
 {
-    gameDelay -= 0.0015*numberOfTimes;
+    gameDelay -= 0.0015 * numberOfTimes;
 }
 
 

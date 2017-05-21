@@ -172,12 +172,12 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
                 newDir = LEFT;
                 break;
             }
-            else if (ai_dir != DOWN && (food->y - coord.y) <= 3 && food->y > coord.y && food->y >= 4)
+            else if (ai_dir != DOWN && (coord.y - food->y) <= 3 && coord.y > food->y && food->y >= 4)
             {
                 newDir = UP;
                 break;
             }
-            else if (ai_dir != UP && (coord.y - food->y) <= 3 && coord.y > food->y && food->y >= (win.y-4))
+            else if (ai_dir != UP && (food->y - coord.y) <= 3 && food->y > coord.y && food->y <= (win.y-4))
             {
                 newDir = DOWN;
                 break;
