@@ -24,7 +24,7 @@ int main()
 
     std::srand(static_cast<unsigned int>(std::time(NULL)));
 
-    ssnake::Display* display = new ssnake::Display();
+    ssnake::Display* display = new ssnake::Display(27, 30);
 
     bool play = true;
     while (play)
