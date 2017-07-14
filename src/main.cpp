@@ -96,8 +96,8 @@ ssnake::Game_t gameSelectMenu(ssnake::Display* display, ssnake::PlayerInput& inp
         }
         else if (direction == ssnake::RIGHT_KEY)
         {
-            display->printTextLine(4, "     Classic Snake     ");
-            display->printTextLine(5, " Get the food but don't hit yourself! ");
+            display->printTextLine(4, "Classic Snake");
+            display->printTextLine(5, "Get the food but don't hit yourself!");
 
             typeSelected = ssnake::GM_CLASSIC;
             display->printTextLine(display->getSize_y() / 2, "  Slicer Snake     [ Classic ]");

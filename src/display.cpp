@@ -245,6 +245,11 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
 
     std::size_t maxTextLength = getmaxx(messageWin) - (windowPadding * 2) - 2;
 
+    wmove(messageWin, lineNumber, 1);
+    for (unsigned int i = 1; i < maxTextLength; ++i)
+    {
+        waddch(messageWin, ' ');
+    }
     mvwaddnstr(messageWin, lineNum, (getmaxx(messageWin) / 2) - (size / 2) + 1, message, static_cast<int>(maxTextLength));
 
     messageWinModified = true;
