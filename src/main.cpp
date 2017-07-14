@@ -44,7 +44,7 @@ int main()
 
         do
         {
-            input.collectInput(-1);
+            input.collectInput();
         } while (!input.getEnter() && !input.getRestart());
         if (!input.getRestart())
         {
@@ -78,7 +78,7 @@ ssnake::Game_t gameSelectMenu(ssnake::Display* display, ssnake::PlayerInput& inp
         }
         else
         {
-            input.collectInput(-1);
+            input.collectInput();
             direction = input.getDirection();
         }
 

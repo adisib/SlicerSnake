@@ -26,9 +26,13 @@ public:
 
     // PreConditions:
     // PostConditions:
-    //   If duration_ms >= 0, collect input for duration_ms milliseconds
-    //   If duration_ms < 0, wait indefinitely for next input
-    void collectInput(int duration_ms);
+    //   Updates state to reflect inputs since last update
+    void updateInputs();
+
+    // PreConditions:
+    // PostConditions:
+    //   Collects an input, then updates state to reflect inputs since last update
+    void collectInput();
 
     // PreConditions:
     // PostConditions:
@@ -37,7 +41,7 @@ public:
 
     // PreConditions:
     // PostConditions:
-    //   Returns the direction that was previous to the current one (only changes if newest direction changes)
+    //   Returns the direction input that was previous to the current one
     DirectionalKey_t getPrevDirection() const;
 
     // PreConditions:
@@ -63,6 +67,7 @@ public:
 private:
 
     void clearInputs();
+    void getInput(bool once);
     static void initCurses();
 
     DirectionalKey_t direction = NONE;

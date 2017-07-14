@@ -70,12 +70,10 @@ public:
 
 private:
 
-    typedef std::chrono::duration<int, std::milli> milliseconds_t;
-
     void runNewClassicGame();
     void runNewSlicerGame();
 
-    void processInputs(Snake* playerSnake);
+    void processInputs(std::chrono::steady_clock::time_point& beginTime, Snake* playerSnake);
 
     Display* display;
     PlayerInput input;

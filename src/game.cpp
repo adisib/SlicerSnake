@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <list>
+#include <thread> // sleep_until
 
 #include "display.h"
 #include "input.h"
@@ -46,7 +47,7 @@ void SnakeGame::setGameDelay(double numSeconds)
 
 
 
-void SnakeGame::processInputs(Snake* playerSnake)
+void SnakeGame::processInputs(std::chrono::steady_clock::time_point& beginTime, Snake* playerSnake)
 {
     if (input.getQuit())
     {
@@ -104,8 +105,9 @@ void SnakeGame::processInputs(Snake* playerSnake)
 
         do
         {
-            input.collectInput(-1);
+            input.collectInput();
         } while (!input.getEnter());
+        beginTime = std::chrono::steady_clock::now();
 
         display->clearGameMessage();
     }
@@ -160,18 +162,13 @@ void SnakeGame::runNewClassicGame()
     std::chrono::steady_clock::time_point beginTime = std::chrono::steady_clock::now();
     while (alive)
     {
-        int loopRunDuration_ms = std::chrono::duration_cast<milliseconds_t>(std::chrono::steady_clock::now() - beginTime).count();
-
-        int msDelay = static_cast<int>(getGameDelay() * 1000) - loopRunDuration_ms;
-        if (msDelay < 0)
-        {
-            msDelay = 0;
-        }
-        input.collectInput(msDelay);
-
+        int msDelay = static_cast<int>(getGameDelay() * 1000);
+        std::this_thread::sleep_until(beginTime + std::chrono::milliseconds(msDelay));
         beginTime = std::chrono::steady_clock::now();
 
-        processInputs(playerSnake);
+        input.updateInputs();
+
+        processInputs(beginTime, playerSnake);
 
         playerSnake->move();
 
@@ -229,18 +226,13 @@ void SnakeGame::runNewSlicerGame()
 
             if (isPlayer)
             {
-                int loopRunDuration_ms = std::chrono::duration_cast<milliseconds_t>(std::chrono::steady_clock::now() - beginTime).count();
-
-                int msDelay = static_cast<int>(getGameDelay() * 1000) - loopRunDuration_ms;
-                if (msDelay < 0)
-                {
-                    msDelay = 0;
-                }
-                input.collectInput(msDelay);
-
+                int msDelay = static_cast<int>(getGameDelay() * 1000);
+                std::this_thread::sleep_until(beginTime + std::chrono::milliseconds(msDelay));
                 beginTime = std::chrono::steady_clock::now();
 
-                processInputs(playerSnake);
+                input.updateInputs();
+
+                processInputs(beginTime, playerSnake);
             }
             else
             {

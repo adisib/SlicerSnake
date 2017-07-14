@@ -1,9 +1,6 @@
 
 #include "input.h"
 
-#include <chrono>
-#include <thread> // sleep_for
-
 #ifdef _WIN32
     #include "curses.h" // pdcurses for windows
 #else
@@ -27,21 +24,8 @@ void PlayerInput::clearInputs()
 
 
 
-void PlayerInput::collectInput(int duration)
+void PlayerInput::getInput(bool once)
 {
-    clearInputs();
-
-    prevDirection = direction;
-
-    if (duration < 0)
-    {
-        nodelay(stdscr, FALSE);
-    }
-    else
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(duration));
-    }
-
     int input;
     do
     {
@@ -112,12 +96,33 @@ void PlayerInput::collectInput(int duration)
                 break;
         }
 
-    } while (duration > 0 && input != ERR);
+    } while (!once && input != ERR);
+}
 
-    if (duration <= 0)
-    {
-        nodelay(stdscr, TRUE);
-    }
+
+
+void PlayerInput::updateInputs()
+{
+    clearInputs();
+
+    prevDirection = direction;
+
+    getInput(false);
+}
+
+
+
+void PlayerInput::collectInput()
+{
+    clearInputs();
+
+    prevDirection = direction;
+
+    nodelay(stdscr, FALSE);
+    getInput(true);
+    nodelay(stdscr, TRUE);
+
+    getInput(false);
 }
 
 
