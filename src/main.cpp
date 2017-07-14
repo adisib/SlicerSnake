@@ -34,9 +34,6 @@ int main()
 
         display->clearScreen();
 
-        // Instructions
-        
-
         ssnake::Game_t gameTypeSelected = gameSelectMenu(display, input);
 
         game.startGame(gameTypeSelected);
