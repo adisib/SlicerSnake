@@ -100,6 +100,7 @@ void Display::clearScreen()
 void Display::drawTexture(Texture_t texture, const Vec2& pos)
 {
     mvwaddchnstr(snakeWin, pos.y, pos.x * 2, gameTextures[texture], 2);
+
     snakeWinModified = true;
 }
 
@@ -298,7 +299,7 @@ void Display::setTextures()
 
     gameTextures = new chtype*[TEXTURE_COUNT];
     gameTextures[0] = new chtype[TEXTURE_COUNT*2];
-    for (int i=1; i < TEXTURE_COUNT; ++i)
+    for (int i = 1; i < TEXTURE_COUNT; ++i)
     {
         gameTextures[i] = *gameTextures + (2*i);
         gameTextures[i][1] = gameTextures[i][0] = missingTexture;
@@ -375,9 +376,7 @@ void Display::update()
 
     doupdate();
 
-    snakeWinModified = false;
-    gameWinModified = false;
-    messageWinModified = false;
+    snakeWinModified = gameWinModified = messageWinModified = false;
 }
 
 }

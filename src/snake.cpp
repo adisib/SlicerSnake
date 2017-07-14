@@ -17,7 +17,7 @@ Snake::Snake(Display* displayHandle,
              const size_t startingLength)
 {
     display = displayHandle;
-    
+
     Vec2 win = {display->getSize_x(), display->getSize_y()};
 
     snakeTextures = textureList;

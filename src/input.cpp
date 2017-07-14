@@ -22,10 +22,7 @@ PlayerInput::PlayerInput()
 
 void PlayerInput::clearInputs()
 {
-    pause = false;
-    restart = false;
-    quit = false;
-    enter = false;
+    pause = restart = quit = enter = false;
 }
 
 
