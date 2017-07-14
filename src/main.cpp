@@ -35,9 +35,7 @@ int main()
         display->clearScreen();
 
         // Instructions
-        display->printTextLine(4, "Get as long as you can");
-        display->printTextLine(5, "But don't let the other snake eat you!");
-        display->update();
+        
 
         ssnake::Game_t gameTypeSelected = gameSelectMenu(display, input);
 
@@ -67,22 +65,40 @@ int main()
 
 ssnake::Game_t gameSelectMenu(ssnake::Display* display, ssnake::PlayerInput& input)
 {
-    ssnake::Game_t typeSelected = ssnake::GM_SLICER;
-    display->printTextLine(display->getSize_y() / 2, "[ Slicer Snake ]     Classic  ");
-    display->update();
+    bool initialSelect = true;
+    ssnake::Game_t typeSelected;
+    ssnake::DirectionalKey_t direction;
+
+    display->printTextLine(7, "Arrow keys move, enter key pauses");
 
     do
     {
-        input.collectInput(-1);
-
-        if (input.getDirection() == ssnake::LEFT_KEY)
+        if (initialSelect)
         {
+            direction = ssnake::LEFT_KEY;
+            typeSelected = ssnake::GM_SLICER;
+            initialSelect = false;
+        }
+        else
+        {
+            input.collectInput(-1);
+            direction = input.getDirection();
+        }
+
+        if (direction == ssnake::LEFT_KEY)
+        {
+            display->printTextLine(4, "Get as long as you can");
+            display->printTextLine(5, "But don't let the other snake eat you!");
+
             typeSelected = ssnake::GM_SLICER;
             display->printTextLine(display->getSize_y() / 2, "[ Slicer Snake ]     Classic  ");
             display->update();
         }
-        else if (input.getDirection() == ssnake::RIGHT_KEY)
+        else if (direction == ssnake::RIGHT_KEY)
         {
+            display->printTextLine(4, "     Classic Snake     ");
+            display->printTextLine(5, " Get the food but don't hit yourself! ");
+
             typeSelected = ssnake::GM_CLASSIC;
             display->printTextLine(display->getSize_y() / 2, "  Slicer Snake     [ Classic ]");
             display->update();
