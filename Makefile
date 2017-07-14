@@ -1,8 +1,8 @@
 
 CC = g++
 SDIR = ./src
-OPTIMIZE = -DNDEBUG -Os -flto -pipe
-DEBUG = -DDEBUG -g -Wall -Wextra -Og
+OPTIMIZE = -DNDEBUG -Os -fstrict-enums -flto -pipe
+DEBUG = -DDEBUG -g -Wall -Og
 CFLAGS = -std=c++11
 LIBS = -lncurses
 
@@ -10,6 +10,7 @@ NAME = SlicerSnake.exe
 
 release: CFLAGS += $(OPTIMIZE)
 release: SlicerSnake
+	strip --strip-debug --strip-unneeded --preserve-dates SlicerSnake.exe
 
 debug: CFLAGS += $(DEBUG)
 debug: SlicerSnake
