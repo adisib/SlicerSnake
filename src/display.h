@@ -31,12 +31,21 @@ struct Vec2
 
 
 
+// Color names
+enum Color_t
+{
+    COLORS_GREEN = 1, COLORS_ALT_GREEN, COLORS_MAGENTA, COLORS_ALT_MAGENTA,
+    COLORS_YELLOW, COLORS_CYAN, COLORS_RED, COLORS_BLACK
+};
+
+
+
 // Texture names
 // TEXTURE_COUNT is a sentinel that indicates how many textures there are, and is not the name of a texture
 enum Texture_t
 {
-    SNAKE_TEXTURE = 1, SNAKE_HEAD_TEXTURE, SS_SNAKE_TEXTURE, SS_SNAKE_HEAD_TEXTURE,
-    FOOD_TEXTURE, COLLISION_TEXTURE, BORDER_TEXTURE, GAME_TEXT_TEXTURE, BACKGROUND_TEXTURE,
+    TEXTURE_SNAKE = 1, TEXTURE_SNAKE_HEAD, TEXTURE_SS_SNAKE, TEXTURE_SS_SNAKE_HEAD,
+    TEXTURE_FOOD, TEXTURE_COLLISION, TEXTURE_BACKGROUND,
     TEXTURE_COUNT
 };
 
@@ -159,8 +168,6 @@ private:
     bool messageWinModified = true;
 
     // List of loaded textures (chtypes in curses)
-    // gameTextures holds colored characters, so that you can use addchstr(textures[Texture_t])
-    // If only want to set the color of custom text, use attron(COLOR_PAIR(Texture_t)), since textures have colors as well
     chtype** gameTextures = nullptr;
 
     // Size of empty space from game content and window edges

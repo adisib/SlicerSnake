@@ -83,9 +83,9 @@ void Display::clearScreen()
     wclear(gameWin);
     wclear(messageWin);
 
-    wattron(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
+    wattron(snakeWin, COLOR_PAIR(COLORS_CYAN));
     box(snakeWin, 0, 0);
-    wattroff(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
+    wattroff(snakeWin, COLOR_PAIR(COLORS_CYAN));
 
     snakeWinModified = true;
     gameWinModified = true;
@@ -186,12 +186,12 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
 
     // gameWin and messageWin always uses the same color for now
-    wattron(gameWin, COLOR_PAIR(GAME_TEXT_TEXTURE));
-    wattron(messageWin, COLOR_PAIR(GAME_TEXT_TEXTURE));
+    wattron(gameWin, COLOR_PAIR(COLORS_RED));
+    wattron(messageWin, COLOR_PAIR(COLORS_RED));
 
-    wattron(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
+    wattron(snakeWin, COLOR_PAIR(COLORS_CYAN));
     box(snakeWin, 0, 0);
-    wattroff(snakeWin, COLOR_PAIR(BORDER_TEXTURE));
+    wattroff(snakeWin, COLOR_PAIR(COLORS_CYAN));
 
     snakeWinModified = true;
     gameWinModified = true;
@@ -227,7 +227,7 @@ void Display::moveSnakeTail(const Vec2& oldPos, const Vec2& newPos, const SnakeT
     chtype prevChar = mvwinch(snakeWin, oldPos.y, oldPos.x * 2);
     if (prevChar == gameTextures[snakeTextures.tail][0])
     {
-        drawTexture(BACKGROUND_TEXTURE, oldPos);
+        drawTexture(TEXTURE_BACKGROUND, oldPos);
     }
 }
 
@@ -279,51 +279,50 @@ void Display::printGameMessage(const char* message)
 
 void Display::setTextures()
 {
-    init_pair(SNAKE_TEXTURE, COLOR_GREEN, COLOR_BLACK);
-    init_pair(SS_SNAKE_TEXTURE, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(FOOD_TEXTURE, COLOR_YELLOW, COLOR_BLACK);
-    init_pair(BORDER_TEXTURE, COLOR_CYAN, COLOR_BLACK);
-    init_pair(GAME_TEXT_TEXTURE, COLOR_RED, COLOR_BLACK);
-    init_pair(COLLISION_TEXTURE, COLOR_RED, COLOR_BLACK);
-    init_pair(BACKGROUND_TEXTURE, COLOR_BLACK, COLOR_BLACK);
+    init_pair(COLORS_GREEN, COLOR_GREEN, COLOR_BLACK);
+    init_pair(COLORS_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(COLORS_YELLOW, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(COLORS_CYAN, COLOR_CYAN, COLOR_BLACK);
+    init_pair(COLORS_RED, COLOR_RED, COLOR_BLACK);
+    init_pair(COLORS_BLACK, COLOR_BLACK, COLOR_BLACK);
     if (can_change_color() && COLORS >= 256 && COLOR_PAIRS >= 16)
     {
         init_color(9, 40, 1000, 90);
         init_color(10, 900, 70, 1000);
 
-        init_pair(SNAKE_HEAD_TEXTURE, 9, COLOR_BLACK);
-        init_pair(SS_SNAKE_HEAD_TEXTURE, 10, COLOR_BLACK);
+        init_pair(COLORS_ALT_GREEN, 9, COLOR_BLACK);
+        init_pair(COLORS_ALT_MAGENTA, 10, COLOR_BLACK);
     }
     else
     {
-        init_pair(SNAKE_HEAD_TEXTURE, COLOR_GREEN, COLOR_BLACK);
-        init_pair(SS_SNAKE_HEAD_TEXTURE, COLOR_MAGENTA, COLOR_BLACK);
+        init_pair(COLORS_ALT_GREEN, COLOR_GREEN, COLOR_BLACK);
+        init_pair(COLORS_ALT_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
     }
 
     const chtype missingTexture = '?';
 
     gameTextures = new chtype*[TEXTURE_COUNT];
-    gameTextures[0] = new chtype[TEXTURE_COUNT*2];
+    gameTextures[0] = new chtype[TEXTURE_COUNT * 2];
     for (int i = 1; i < TEXTURE_COUNT; ++i)
     {
         gameTextures[i] = *gameTextures + (2*i);
         gameTextures[i][1] = gameTextures[i][0] = missingTexture;
     }
 
-    gameTextures[SNAKE_TEXTURE][0]         = '(' | COLOR_PAIR(SNAKE_TEXTURE);
-    gameTextures[SNAKE_TEXTURE][1]         = ')' | COLOR_PAIR(SNAKE_TEXTURE);
-    gameTextures[SNAKE_HEAD_TEXTURE][0]    = '<' | COLOR_PAIR(SNAKE_HEAD_TEXTURE);
-    gameTextures[SNAKE_HEAD_TEXTURE][1]    = '>' | COLOR_PAIR(SNAKE_HEAD_TEXTURE);
-    gameTextures[SS_SNAKE_TEXTURE][0]      = '(' | COLOR_PAIR(SS_SNAKE_TEXTURE);
-    gameTextures[SS_SNAKE_TEXTURE][1]      = ')' | COLOR_PAIR(SS_SNAKE_TEXTURE);
-    gameTextures[SS_SNAKE_HEAD_TEXTURE][0] = '<' | COLOR_PAIR(SS_SNAKE_HEAD_TEXTURE);
-    gameTextures[SS_SNAKE_HEAD_TEXTURE][1] = '>' | COLOR_PAIR(SS_SNAKE_HEAD_TEXTURE);
-    gameTextures[FOOD_TEXTURE][0]          = '{' | COLOR_PAIR(FOOD_TEXTURE);
-    gameTextures[FOOD_TEXTURE][1]          = '}' | COLOR_PAIR(FOOD_TEXTURE);
-    gameTextures[COLLISION_TEXTURE][0]     = '*' | COLOR_PAIR(COLLISION_TEXTURE);
-    gameTextures[COLLISION_TEXTURE][1]     = '*' | COLOR_PAIR(COLLISION_TEXTURE);
-    gameTextures[BACKGROUND_TEXTURE][0]    = ' ' | COLOR_PAIR(BACKGROUND_TEXTURE);
-    gameTextures[BACKGROUND_TEXTURE][1]    = ' ' | COLOR_PAIR(BACKGROUND_TEXTURE);
+    gameTextures[TEXTURE_SNAKE][0]         = '(' | COLOR_PAIR(COLORS_GREEN);
+    gameTextures[TEXTURE_SNAKE][1]         = ')' | COLOR_PAIR(COLORS_GREEN);
+    gameTextures[TEXTURE_SNAKE_HEAD][0]    = '<' | COLOR_PAIR(COLORS_ALT_GREEN);
+    gameTextures[TEXTURE_SNAKE_HEAD][1]    = '>' | COLOR_PAIR(COLORS_ALT_GREEN);
+    gameTextures[TEXTURE_SS_SNAKE][0]      = '(' | COLOR_PAIR(COLORS_MAGENTA);
+    gameTextures[TEXTURE_SS_SNAKE][1]      = ')' | COLOR_PAIR(COLORS_MAGENTA);
+    gameTextures[TEXTURE_SS_SNAKE_HEAD][0] = '<' | COLOR_PAIR(COLORS_ALT_MAGENTA);
+    gameTextures[TEXTURE_SS_SNAKE_HEAD][1] = '>' | COLOR_PAIR(COLORS_ALT_MAGENTA);
+    gameTextures[TEXTURE_FOOD][0]          = '{' | COLOR_PAIR(COLORS_YELLOW);
+    gameTextures[TEXTURE_FOOD][1]          = '}' | COLOR_PAIR(COLORS_YELLOW);
+    gameTextures[TEXTURE_COLLISION][0]     = '*' | COLOR_PAIR(COLORS_RED);
+    gameTextures[TEXTURE_COLLISION][1]     = '*' | COLOR_PAIR(COLORS_RED);
+    gameTextures[TEXTURE_BACKGROUND][0]    = ' ' | COLOR_PAIR(COLORS_BLACK);
+    gameTextures[TEXTURE_BACKGROUND][1]    = ' ' | COLOR_PAIR(COLORS_BLACK);
 }
 
 

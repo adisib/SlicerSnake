@@ -147,7 +147,7 @@ void SnakeGame::runNewClassicGame()
 
     SnakeTextureList textures;
     Vec2 snakeStartingPos = {4, 3};
-    textures.head = SNAKE_HEAD_TEXTURE; textures.body = SNAKE_TEXTURE; textures.tail = SNAKE_TEXTURE;
+    textures.head = TEXTURE_SNAKE_HEAD; textures.body = TEXTURE_SNAKE; textures.tail = TEXTURE_SNAKE;
     snakeList.emplace_front(display, textures, snakeStartingPos, 3);
     Snake* playerSnake = &(snakeList.front());
 
@@ -203,12 +203,12 @@ void SnakeGame::runNewSlicerGame()
 
     SnakeTextureList textures;
     Vec2 snakeStartingPos = {4, 3};
-    textures.head = SNAKE_HEAD_TEXTURE; textures.body = SNAKE_TEXTURE; textures.tail = SNAKE_TEXTURE;
+    textures.head = TEXTURE_SNAKE_HEAD; textures.body = TEXTURE_SNAKE; textures.tail = TEXTURE_SNAKE;
     snakeList.emplace_front(display, textures, snakeStartingPos, 3);
     Snake* playerSnake = &(snakeList.front());
 
     snakeStartingPos = {display->getSize_x() - 4, display->getSize_y() - 3};
-    textures.head = SS_SNAKE_HEAD_TEXTURE; textures.body = SS_SNAKE_TEXTURE; textures.tail = SS_SNAKE_TEXTURE;
+    textures.head = TEXTURE_SS_SNAKE_HEAD; textures.body = TEXTURE_SS_SNAKE; textures.tail = TEXTURE_SS_SNAKE;
     snakeList.emplace_front(display, textures, snakeStartingPos, 3);
 
     spawnFood();
@@ -328,7 +328,7 @@ void SnakeGame::spawnFood()
     } while (foodBad);
 
     foodList.push_back(food);
-    display->drawTexture(FOOD_TEXTURE, food);
+    display->drawTexture(TEXTURE_FOOD, food);
 
     return;
 }

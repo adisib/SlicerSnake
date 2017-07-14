@@ -207,7 +207,7 @@ bool Snake::checkCollision()
     // wall collision
     if (head.x >= (win.x - 1) || head.x <= 0 || head.y >= (win.y - 1) || head.y <= 0)
     {
-        display->drawTexture(COLLISION_TEXTURE, head);
+        display->drawTexture(TEXTURE_COLLISION, head);
 
         return true;
     }
@@ -316,7 +316,7 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
                 {
                     for (it = slicedIter->pos.begin(); it != cut; ++it)
                     {
-                        display->drawTexture(BACKGROUND_TEXTURE, *it);
+                        display->drawTexture(TEXTURE_BACKGROUND, *it);
                     }
                 }
                 slicedIter->pos.erase(slicedIter->pos.begin(), cut);
@@ -386,7 +386,7 @@ void Snake::move()
     }
     else
     {
-        display->drawTexture(BACKGROUND_TEXTURE, pos.back());
+        display->drawTexture(TEXTURE_BACKGROUND, pos.back());
     }
 
     // remove at tail but not if length increased
