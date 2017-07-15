@@ -1,3 +1,20 @@
+Version 1.2:
+	Description:
+		General improvements and bug fixes, no new features.
+
+	Improvements/Enhancements to previous version:
+		Release builds from makefile will be smaller
+
+	Changes/Additions from previous version:
+		Instructions are specific to the currently selected mode and basic controls shown.
+
+	Bug-Fixes since previous version:
+		Fixed issue where pausing would immediately go to next frame ignoring timing.
+		Fixed issue where AI controlled snake wouldn't try to grab food when it was supposed to.
+
+	Known Bugs for current version:
+
+
 Version 1.1:
 	Description:
 		General improvements and bug fixes, no new features.
@@ -5,7 +22,7 @@ Version 1.1:
 	Improvements/Enhancements to previous version:
 
 	Changes/Additions from previous version:
-		The game will now finish the next step before pausing.
+		The game will now finish the next step after pausing (next frame using inputs before pausing).
 
 	Bug-Fixes since previous version:
 		Fixed issue where resizing the terminal would permanently deform the game window.
