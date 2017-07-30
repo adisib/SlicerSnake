@@ -182,7 +182,7 @@ void Display::initScreen(coordType size_x, coordType size_y)
     else
     {
         // We have to make it slightly smaller here for Windows builds with pdcurses, because pdcurses doesn't allow it to be the same size
-        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2) - 1, ScreenSize.x - (windowPadding * 2) - 2, 0, 0);
+        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2) - 2, ScreenSize.x - (windowPadding * 2) - 2, 1, 1);
     }
 
     // gameWin and messageWin always uses the same color for now
@@ -242,15 +242,17 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
     }
 
     std::size_t size = std::strlen(message);
+    int maxTextLength = getmaxx(messageWin);
 
-    std::size_t maxTextLength = getmaxx(messageWin) - (windowPadding * 2) - 2;
-
-    wmove(messageWin, lineNumber, 1);
-    for (unsigned int i = 1; i < maxTextLength; ++i)
+    for (int i = 0; i < maxTextLength; ++i)
     {
-        waddch(messageWin, ' ');
+        chtype curChar = mvwinch(messageWin, lineNumber, i);
+        if ((curChar & A_COLOR) == COLOR_PAIR(COLORS_RED))
+        {
+            waddch(messageWin, ' ');
+        }
     }
-    mvwaddnstr(messageWin, lineNum, (getmaxx(messageWin) / 2) - (size / 2) + 1, message, static_cast<int>(maxTextLength));
+    mvwaddnstr(messageWin, lineNum, (getmaxx(messageWin) / 2) - (size / 2), message, maxTextLength);
 
     messageWinModified = true;
 }
@@ -368,8 +370,8 @@ void Display::update()
     if (messageWinModified)
     {
         pnoutrefresh(messageWin, 0, 0,
-                     windowPadding, windowPadding,
-                     ScreenSize.y - (gameTextLines + windowPadding), ScreenSize.x - windowPadding);
+                     windowPadding + 1, windowPadding + 1,
+                     ScreenSize.y - (gameTextLines + windowPadding) - 1, ScreenSize.x - windowPadding - 1);
     }
     if (gameWinModified)
     {
