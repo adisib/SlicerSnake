@@ -307,7 +307,7 @@ void Display::setTextures()
     gameTextures[0] = new chtype[TEXTURE_COUNT * 2];
     for (int i = 1; i < TEXTURE_COUNT; ++i)
     {
-        gameTextures[i] = *gameTextures + (2*i);
+        gameTextures[i] = *gameTextures + (2 * i);
         gameTextures[i][1] = gameTextures[i][0] = missingTexture;
     }
 

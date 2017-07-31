@@ -220,21 +220,18 @@ void SnakeGame::runNewSlicerGame()
     std::chrono::steady_clock::time_point beginTime = std::chrono::steady_clock::now();
     while (alive)
     {
+        int msDelay = static_cast<int>(getGameDelay() * 1000);
+        std::this_thread::sleep_until(beginTime + std::chrono::milliseconds(msDelay));
+        beginTime = std::chrono::steady_clock::now();
+
+        input.updateInputs();
+        processInputs(beginTime, playerSnake);
+
         for (std::list<Snake>::iterator snakeIter = snakeList.begin(); snakeIter != snakeList.end(); ++snakeIter)
         {
             isPlayer = playerSnake == &(*snakeIter);
 
-            if (isPlayer)
-            {
-                int msDelay = static_cast<int>(getGameDelay() * 1000);
-                std::this_thread::sleep_until(beginTime + std::chrono::milliseconds(msDelay));
-                beginTime = std::chrono::steady_clock::now();
-
-                input.updateInputs();
-
-                processInputs(beginTime, playerSnake);
-            }
-            else
+            if (!isPlayer)
             {
                 snakeIter->ai_getDirection(foodList);
             }
