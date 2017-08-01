@@ -323,8 +323,8 @@ void Display::setTextures()
     gameTextures[TEXTURE_FOOD][1]          = '}' | COLOR_PAIR(COLORS_YELLOW);
     gameTextures[TEXTURE_COLLISION][0]     = '*' | COLOR_PAIR(COLORS_RED);
     gameTextures[TEXTURE_COLLISION][1]     = '*' | COLOR_PAIR(COLORS_RED);
-    gameTextures[TEXTURE_BACKGROUND][0]    = ' ' | COLOR_PAIR(COLORS_BLACK);
-    gameTextures[TEXTURE_BACKGROUND][1]    = ' ' | COLOR_PAIR(COLORS_BLACK);
+    gameTextures[TEXTURE_BACKGROUND][0]    = ' ';
+    gameTextures[TEXTURE_BACKGROUND][1]    = ' ';
 }
 
 
