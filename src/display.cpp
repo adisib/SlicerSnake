@@ -186,8 +186,8 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
 
     // gameWin and messageWin always uses the same color for now
+    // But don't set always for messageWin because is a subPad
     wattron(gameWin, COLOR_PAIR(COLORS_RED));
-    wattron(messageWin, COLOR_PAIR(COLORS_RED));
 
     wattron(snakeWin, COLOR_PAIR(COLORS_CYAN));
     box(snakeWin, 0, 0);
@@ -252,7 +252,9 @@ void Display::printTextLine(unsigned int lineNumber, const char* message)
             waddch(messageWin, ' ');
         }
     }
+    wattron(messageWin, COLOR_PAIR(COLORS_RED));
     mvwaddnstr(messageWin, lineNum, (getmaxx(messageWin) / 2) - (size / 2), message, maxTextLength);
+    wattroff(messageWin, COLOR_PAIR(COLORS_RED));
 
     messageWinModified = true;
 }
