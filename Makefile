@@ -10,7 +10,7 @@ NAME = SlicerSnake.exe
 
 release: CFLAGS += $(OPTIMIZE)
 release: SlicerSnake
-	strip --strip-debug --strip-unneeded --preserve-dates SlicerSnake.exe
+	strip --strip-debug --strip-unneeded --preserve-dates $(NAME)
 
 debug: CFLAGS += $(DEBUG)
 debug: SlicerSnake
@@ -31,4 +31,4 @@ input.o: $(SDIR)/input.h $(SDIR)/input.cpp
 	$(CC) $(CFLAGS) -c $(SDIR)/input.cpp
 
 clean:
-	rm SlicerSnake.exe *.o
+	rm $(NAME) *.o
