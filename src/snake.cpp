@@ -215,12 +215,15 @@ bool Snake::checkCollision()
 
     // self collision
     // If checkSlice happens first, then it can't collide with itself.
-    std::list<Vec2>::const_iterator stop = --pos.cend();
-    for (std::list<Vec2>::const_iterator it = pos.cbegin(); it != stop; ++it)
+    if (length > 4)
     {
-        if (head.x == it->x && head.y == it->y)
+        std::list<Vec2>::const_iterator stop = --(--(--( --pos.cend() ))); // It isn't possible to self-hit segments just before the head
+        for (std::list<Vec2>::const_iterator it = pos.cbegin(); it != stop; ++it)
         {
-            return true;
+            if (head.x == it->x && head.y == it->y)
+            {
+                return true;
+            }
         }
     }
 
