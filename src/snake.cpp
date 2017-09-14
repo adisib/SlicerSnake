@@ -214,7 +214,7 @@ bool Snake::checkCollision()
 
 
     // self collision
-    // If checkSlice happens first, then it can't collide with itself.
+    // If checkSlice with itself happens first, then any collision segment will be removed
     if (length > 4)
     {
         std::list<Vec2>::const_iterator stop = --(--(--( --pos.cend() ))); // It isn't possible to self-hit segments just before the head
@@ -293,17 +293,22 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
 
         Vec2 sd_coord;
 
-        size_t checkSize = slicedIter->pos.size();
+        int checkSize = slicedIter->pos.size();
 
-        // work-around to make snake not collide with it's own head
+        // Decrease collision-checksize by 1 as work-around to make snake not collide with it's own head
+        // It can't actually hit the three segments behind head, so subtracting 3 more allows skipping checking those
         if (this == &(*slicedIter))
         {
-            --checkSize;
+            checkSize -= 4;
+            if (checkSize < 0)
+            {
+                checkSize = 0;
+            }
         }
 
         std::list<Vec2>::iterator it = slicedIter->pos.begin();
         std::list<Vec2>::iterator cut;
-        for (size_t i = 1; i <= checkSize; ++i)
+        for (int i = 1; i <= checkSize; ++i)
         {
             sd_coord = *it++;
 
@@ -312,7 +317,7 @@ size_t Snake::checkSlice(std::list<Snake>& snakeList)
                 cut = it;
                 totalCount += i;
 
-                assert(slicedIter->length >= i);
+                assert(static_cast<int>(slicedIter->length) >= i);
                 slicedIter->length -= i;
 
                 if (slicedIter->length != 0)
