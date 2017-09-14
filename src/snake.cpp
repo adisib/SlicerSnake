@@ -135,24 +135,25 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
         // random movement every so often
         if (coord.x > 3 && coord.y > 3 && xOffset > 3 && yOffset > 3)
         {
+            int randn = rand() % 15;
             if (ai_dir == DOWN || ai_dir == UP)
             {
-                if ((rand() % 16 + 1) == 2)
+                if (randn == 1)
                 {
                     newDir = LEFT;
                 }
-                else if ((rand() % 18 + 1) == 3)
+                else if (randn == 2)
                 {
                     newDir = RIGHT;
                 }
             }
             else
             {
-                if ((rand() % 16 + 1) == 2)
+                if (randn == 1)
                 {
                     newDir = UP;
                 }
-                else if ((rand() % 18 + 1) == 3)
+                else if (randn == 2)
                 {
                     newDir = DOWN;
                 }
