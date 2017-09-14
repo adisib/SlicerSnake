@@ -82,26 +82,26 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
     // prevent hitting wall
     if (coord.x < 4 || coord.y < 4 || xOffset < 4 || yOffset < 4)
     {
-        if (ai_dir != LEFT && coord.x < 3)
+        if (ai_dir != LEFT && coord.x < 4)
         {
             newDir = RIGHT;
         }
-        else if (ai_dir != RIGHT && xOffset < 3)
+        else if (ai_dir != RIGHT && xOffset < 4)
         {
             newDir = LEFT;
         }
-        if (ai_dir != UP && coord.y < 3)
+        if (ai_dir != UP && coord.y < 4)
         {
             newDir = DOWN;
         }
-        else if (ai_dir != DOWN && yOffset < 3)
+        else if (ai_dir != DOWN && yOffset < 4)
         {
             newDir = UP;
         }
         // if can't go backwards have to do multi-step turn around
         if ((ai_dir == LEFT && coord.x < 4) || (ai_dir == RIGHT && xOffset < 4))
         {
-            if ((rand() % 2 + 1) == 2 && coord.y > 4)
+            if ((rand() % 2) == 1 && coord.y > 4)
             {
                 newDir = UP;
             }
@@ -116,7 +116,7 @@ void Snake::ai_getDirection(const std::list<Vec2>& foodList)
         }
         if ((ai_dir == UP && coord.y < 4) || (ai_dir == DOWN && yOffset < 4))
         {
-            if ((rand() % 2 + 1) == 2 && coord.x > 4)
+            if ((rand() % 2) == 1 && coord.x > 4)
             {
                 newDir = RIGHT;
             }
