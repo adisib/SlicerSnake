@@ -181,8 +181,8 @@ void Display::initScreen(coordType size_x, coordType size_y)
     }
     else
     {
-        // We have to make it slightly smaller here for Windows builds with pdcurses, because pdcurses doesn't allow it to be the same size
-        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2) - 2, ScreenSize.x - (windowPadding * 2) - 2, 1, 1);
+        // It doesn't matter anymore, but note that for pdcurses compatability, sub-windows/pads cannot be the same size as parent
+        messageWin = subpad(snakeWin, ScreenSize.y - (gameTextLines + windowPadding * 2) - 4, ScreenSize.x - (windowPadding * 2) - 4, 2, 2);
     }
 
     // gameWin and messageWin always uses the same color for now
@@ -372,8 +372,8 @@ void Display::update()
     if (messageWinModified)
     {
         pnoutrefresh(messageWin, 0, 0,
-                     windowPadding + 1, windowPadding + 1,
-                     ScreenSize.y - (gameTextLines + windowPadding) - 1, ScreenSize.x - windowPadding - 1);
+                     windowPadding + 2, windowPadding + 2,
+                     ScreenSize.y - (gameTextLines + windowPadding) - 2, ScreenSize.x - windowPadding - 2);
     }
     if (gameWinModified)
     {
