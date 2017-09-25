@@ -216,10 +216,12 @@ bool Snake::checkCollision()
 
     // self collision
     // If checkSlice with itself happens first, then any collision segment will be removed
-    if (length > 4)
+    if (pos.size() > 4)
     {
-        std::list<Vec2>::const_iterator stop = --(--(--( --pos.cend() ))); // It isn't possible to self-hit segments just before the head
-        for (std::list<Vec2>::const_iterator it = pos.cbegin(); it != stop; ++it)
+        // It isn't possible to self-hit segments just before the head
+        int checkLength = pos.size() - 4;
+        std::list<Vec2>::const_iterator it = pos.cbegin();
+        for (int i = 0; i < checkLength; ++i, ++it)
         {
             if (head.x == it->x && head.y == it->y)
             {
